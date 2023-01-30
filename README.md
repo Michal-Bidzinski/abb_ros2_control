@@ -26,9 +26,9 @@ ROS2 repository to control ABB robots with MoveIt!2.
    
 ## Usage
 To run full stack:
-    ```sh
+```sh
    ros2 launch abb_control arm_control.launch.py
-   ```
+```
 This roslaunch takes two parameters: *runtime_config_package* and *param_file*. 
 First parameter is package name, which contain all necessary config file. This repository contain four packages with configs:
 * abb_irb_120_config
