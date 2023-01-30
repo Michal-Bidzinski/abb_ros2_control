@@ -1,0 +1,38 @@
+urdf:
+  description_file: 'arm.urdf.xacro'
+srdf:
+  srdf_file: 'abb.srdf.xacro'
+rviz:
+  config: 'move_group.rviz'
+  launch_rviz: 'True'
+planning_pipeline:
+  planning_config: 'ompl_planning.yaml'
+robots:
+  r1:
+    resource_package:
+      package: 'abb_irb_120_resource'
+    robot_description:
+      description_file: 'arm.urdf.xacro'
+      use_fake_hardware: 'False'
+      fake_sensor_commands: 'False'
+      rws_ip: '192.168.88.200'
+      rws_port: '80'
+      egm_port: '6512'
+      x_trans: '0.5' 
+      y_trans: '0'
+      z_trans: '0'
+      x_rot: '0'
+      y_rot: '0'
+      z_rot: '0'
+move_group:
+  robots_list: ['r1']
+velocity:
+  value: '2'
+config_folder:
+  name: 'r1'
+moveit:
+  kinematics: 'kinematics.yaml'
+  controllers: 'controllers.yaml'
+  joint_limits: 'joint_limits_real.yaml'
+controller_manager:
+  ros_controllers: 'ros_controllers.yaml'

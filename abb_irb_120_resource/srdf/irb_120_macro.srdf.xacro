@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="abb">
+
+  <xacro:macro name="abb_irb_120_srdf" params="prefix">
+
+    <group name="${prefix}_abb_arm">
+      <chain base_link="${prefix}_link_0" tip_link="${prefix}_endeffector"/>
+    </group>
+
+    <group_state group="${prefix}_abb_arm" name="ready">
+      <joint name="${prefix}_joint_1" value="0"/>
+      <joint name="${prefix}_joint_2" value="0"/>
+      <joint name="${prefix}_joint_3" value="0"/>
+      <joint name="${prefix}_joint_4" value="0"/>
+      <joint name="${prefix}_joint_5" value="0"/>
+      <joint name="${prefix}_joint_6" value="0"/>
+    </group_state>
+
+    <disable_collisions link1="${prefix}_link_0" link2="${prefix}_link_1" reason="Adjacent"/>
+    <disable_collisions link1="${prefix}_link_0" link2="${prefix}_link_2" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_0" link2="${prefix}_link_3" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_0" link2="${prefix}_link_4" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_1" link2="${prefix}_link_2" reason="Adjacent"/>
+    <disable_collisions link1="${prefix}_link_1" link2="${prefix}_link_3" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_1" link2="${prefix}_link_4" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_2" link2="${prefix}_link_3" reason="Adjacent"/>
+    <disable_collisions link1="${prefix}_link_2" link2="${prefix}_link_4" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_2" link2="${prefix}_link_6" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_3" link2="${prefix}_link_4" reason="Adjacent"/>
+    <disable_collisions link1="${prefix}_link_3" link2="${prefix}_link_5" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_3" link2="${prefix}_link_6" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_4" link2="${prefix}_link_5" reason="Adjacent"/>
+    <disable_collisions link1="${prefix}_link_4" link2="${prefix}_link_6" reason="Never"/>
+    <disable_collisions link1="${prefix}_link_5" link2="${prefix}_link_6" reason="Adjacent"/>
+
+  </xacro:macro>
+
+</robot>

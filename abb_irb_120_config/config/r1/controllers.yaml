@@ -1,0 +1,14 @@
+controller_names:
+  - r1_arm_controller
+
+r1_arm_controller:
+  action_ns: follow_joint_trajectory
+  type: FollowJointTrajectory
+  default: true
+  joints:
+    - r1_joint_1
+    - r1_joint_2
+    - r1_joint_3
+    - r1_joint_4
+    - r1_joint_5
+    - r1_joint_6

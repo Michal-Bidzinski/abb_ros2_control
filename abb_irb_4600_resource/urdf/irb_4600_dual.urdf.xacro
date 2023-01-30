@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="abb">
+
+    <xacro:arg name="prefix_one" default=""/>
+    <xacro:property name="prefix_one" value="$(arg prefix_one)"/>
+    <xacro:arg name="use_fake_hardware_one" default="true"/>
+    <xacro:property name="use_fake_hardware_one" value="$(arg use_fake_hardware_one)"/>
+    <xacro:arg name="rws_ip_one" default="None"/>
+    <xacro:property name="rws_ip_one" value="$(arg rws_ip_one)"/>
+    <xacro:arg name="rws_port_one" default="80"/>
+    <xacro:property name="rws_port_one" value="$(arg rws_port_one)"/>
+    <xacro:arg name="egm_port_one" default="6511"/>
+    <xacro:property name="egm_port_one" value="$(arg egm_port_one)"/>
+
+    <xacro:arg name="prefix_two" default=""/>
+    <xacro:property name="prefix_two" value="$(arg prefix_two)"/>
+    <xacro:arg name="use_fake_hardware_two" default="true"/>
+    <xacro:property name="use_fake_hardware_two" value="$(arg use_fake_hardware_two)"/>
+    <xacro:arg name="rws_ip_two" default="None"/>
+    <xacro:property name="rws_ip_two" value="$(arg rws_ip_two)"/>
+    <xacro:arg name="rws_port_two" default="80"/>
+    <xacro:property name="rws_port_two" value="$(arg rws_port_two)"/>
+    <xacro:arg name="egm_port_two" default="6511"/>
+    <xacro:property name="egm_port_two" value="$(arg egm_port_two)"/>
+
+    <xacro:arg name="x_trans_one" default="0"/>
+    <xacro:property name="x_trans_one" value="$(arg x_trans_one)"/>
+    <xacro:arg name="y_trans_one" default="0"/>
+    <xacro:property name="y_trans_one" value="$(arg y_trans_one)"/>
+    <xacro:arg name="z_trans_one" default="0"/>
+    <xacro:property name="z_trans_one" value="$(arg z_trans_one)"/>
+    <xacro:arg name="x_rot_one" default="0"/>
+    <xacro:property name="x_rot_one" value="$(arg x_rot_one)"/>
+    <xacro:arg name="y_rot_one" default="0"/>
+    <xacro:property name="y_rot_one" value="$(arg y_rot_one)"/>
+    <xacro:arg name="z_rot_one" default="0"/>
+    <xacro:property name="z_rot_one" value="$(arg z_rot_one)"/>
+
+    <xacro:arg name="x_trans_two" default="0"/>
+    <xacro:property name="x_trans_two" value="$(arg x_trans_two)"/>
+    <xacro:arg name="y_trans_two" default="0"/>
+    <xacro:property name="y_trans_two" value="$(arg y_trans_two)"/>
+    <xacro:arg name="z_trans_two" default="0"/>
+    <xacro:property name="z_trans_two" value="$(arg z_trans_two)"/>
+    <xacro:arg name="x_rot_two" default="0"/>
+    <xacro:property name="x_rot_two" value="$(arg x_rot_two)"/>
+    <xacro:arg name="y_rot_two" default="0"/>
+    <xacro:property name="y_rot_two" value="$(arg y_rot_two)"/>
+    <xacro:arg name="z_rot_two" default="0"/>
+    <xacro:property name="z_rot_two" value="$(arg z_rot_two)"/>
+
+    <!-- Robot description -->
+    <xacro:include filename="$(find abb_irb_4600_resource)/urdf/irb_4600_macro.xacro" />
+    
+    <material name="white">
+    <color rgba="1 1 1 1"/>
+    </material>
+    <link name="base_link"/>
+    <xacro:irb_4600_arm prefix="${prefix_one}" parent_link='base_link' xyz='${x_trans_one} ${y_trans_one} ${z_trans_one}' rpy='${x_rot_one} ${y_rot_one} ${z_rot_one}'/>
+    <xacro:irb_4600_arm prefix="${prefix_two}" parent_link='base_link' xyz='${x_trans_two} ${y_trans_two} ${z_trans_two}' rpy='${x_rot_two} ${y_rot_two} ${z_rot_two}'/>
+
+    <!-- ros2_control -->
+    <xacro:include filename="$(find abb_irb_4600_resource)/urdf/irb_4600_dual.ros2_control.xacro" />
+    <xacro:irb_4600_control
+        name_one="${prefix_one}_ABBMultiInterfaceHardware"
+        prefix_one="${prefix_one}"
+        use_fake_hardware_one="${use_fake_hardware_one}"
+        rws_ip_one="${rws_ip_one}"
+        rws_port_one="${rws_port_one}"
+        egm_port_one="${egm_port_one}"
+        name_two="${prefix_two}_ABBMultiInterfaceHardware"
+        prefix_two="${prefix_two}"
+        use_fake_hardware_two="${use_fake_hardware_two}"
+        rws_ip_two="${rws_ip_two}"
+        rws_port_two="${rws_port_two}"
+        egm_port_two="${egm_port_two}"/>
+    
+</robot>

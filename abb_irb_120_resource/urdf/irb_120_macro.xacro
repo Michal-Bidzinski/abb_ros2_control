@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<robot name="abb_irb_120" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="irb_120_arm" params="prefix parent_link xyz rpy velocity">
+
+    <xacro:property name="l1_trans" value="${xyz}" />
+    <xacro:property name="l1_rot" value="${rpy}" />
+    <xacro:property name="l1_dl" value="0.0" />
+    <xacro:property name="l1_ul" value="0.0" />
+
+    <xacro:property name="l2_trans" value="0.0 0.0 0.166" />
+    <xacro:property name="l2_rot" value="0.0 0.0 0.0" />
+    <xacro:property name="l2_dl" value="-165" />
+    <xacro:property name="l2_ul" value="165" />
+
+    <xacro:property name="l3_trans" value="0.0 0.0 0.124" />
+    <xacro:property name="l3_rot" value="-1.5707 0.0 0.0" />
+    <xacro:property name="l3_dl" value="-110" />
+    <xacro:property name="l3_ul" value="110" />
+
+    <xacro:property name="l4_trans" value="0.0 -0.270 0.0" />
+    <xacro:property name="l4_rot" value="0.0 0.0 -1.5707" />
+    <xacro:property name="l4_dl" value="-110" />
+    <xacro:property name="l4_ul" value="70" />
+
+    <xacro:property name="l5_trans" value="0.07 0.149 0.0" />
+    <xacro:property name="l5_rot" value="-1.5707 0.0 0.0" />
+    <xacro:property name="l5_dl" value="-160" />
+    <xacro:property name="l5_ul" value="160" />
+
+    <xacro:property name="l6_trans" value="0.0 0.0 0.1524" />
+    <xacro:property name="l6_rot" value="1.5707 0.0 0.0" />
+    <xacro:property name="l6_dl" value="-120" />
+    <xacro:property name="l6_ul" value="120" />
+
+    <xacro:property name="l7_trans" value="0.0 0.06041 0.0" />
+    <xacro:property name="l7_rot" value="-1.5707 0.0 0.0" />
+    <xacro:property name="l7_dl" value="-400" />
+    <xacro:property name="l7_ul" value="400" />
+
+    <xacro:property name="e_trans" value="0.0 0.0 0.012" />
+    <xacro:property name="e_rot" value="0.0 0.0 0.0" />
+    <xacro:property name="e_dl" value="" />
+    <xacro:property name="e_ul" value="0" />
+
+    <!-- <link name="base_link"/> -->
+
+    <xacro:macro name="arm_link" params="name joint_num l_trans l_rot l_dl l_ul parent joint_type mesh">
+      <link name="${prefix}_${name}">
+        <visual>
+          <geometry>
+            <mesh filename="${mesh}"/>
+          </geometry>
+          <material name="white"/>
+        </visual>
+        <collision>
+          <geometry>
+            <mesh filename="${mesh}"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="${prefix}_joint_${joint_num}" type="${joint_type}">
+        <parent link="${parent}"/>
+        <child link="${prefix}_${name}"/>
+        <axis xyz="0 0 1"/>
+        <origin xyz="${l_trans}" rpy="${l_rot}"/>
+        <xacro:if value="${joint_type == 'revolute'}">
+            <limit effort="1000.0" lower="${l_dl * 3.141 / 180}" upper="${l_ul * 3.141 / 180}" velocity="${velocity}"/>
+        </xacro:if>
+      </joint>
+    </xacro:macro>
+
+    <xacro:arm_link name="link_0"
+                    joint_num="0"
+                    l_trans='${l1_trans}'
+                    l_rot='${l1_rot}'
+                    l_dl='${l1_dl}' l_ul='${l1_ul}'
+                    parent="${parent_link}"
+                    joint_type="fixed"
+                    mesh="package://abb_irb_120_resource/meshes/Link_1.stl"/>
+
+    <xacro:arm_link name="link_1" 
+                    joint_num="1"
+                    l_trans='${l2_trans}'
+                    l_rot='${l2_rot}'
+                    l_dl='${l2_dl}' l_ul='${l2_ul}'                  
+                    parent="${prefix}_link_0" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_2.stl"/>
+
+    <xacro:arm_link name="link_2" 
+                    joint_num="2"
+                    l_trans='${l3_trans}'
+                    l_rot='${l3_rot}'
+                    l_dl='${l3_dl}' l_ul='${l3_ul}'                  
+                    parent="${prefix}_link_1" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_3.stl"/>
+
+    <xacro:arm_link name="link_3" 
+                    joint_num="3"
+                    l_trans='${l4_trans}'
+                    l_rot='${l4_rot}'
+                    l_dl='${l4_dl}' l_ul='${l4_ul}'                  
+                    parent="${prefix}_link_2" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_4.stl"/>
+
+    <xacro:arm_link name="link_4" 
+                    joint_num="4"
+                    l_trans='${l5_trans}'
+                    l_rot='${l5_rot}'
+                    l_dl='${l5_dl}' l_ul='${l5_ul}'                  
+                    parent="${prefix}_link_3" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_5.stl"/>
+
+    <xacro:arm_link name="link_5" 
+                    joint_num="5"
+                    l_trans='${l6_trans}'
+                    l_rot='${l6_rot}'
+                    l_dl='${l6_dl}' l_ul='${l6_ul}'                  
+                    parent="${prefix}_link_4" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_6.stl"/>
+
+    <xacro:arm_link name="link_6"
+                    joint_num="6"
+                    l_trans='${l7_trans}'
+                    l_rot='${l7_rot}'
+                    l_dl='${l7_dl}' l_ul='${l7_ul}'                  
+                    parent="${prefix}_link_5" 
+                    joint_type="revolute"
+                    mesh="package://abb_irb_120_resource/meshes/Link_7.stl"/>
+
+    <link name="${prefix}_endeffector"/>
+
+    <joint name="${prefix}_joint_endeffector" type="fixed">
+      <parent link="${prefix}_link_6"/>
+      <child link="${prefix}_endeffector"/>
+      <origin xyz="${e_trans}" rpy="${e_rot}"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>
