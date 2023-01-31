@@ -27,7 +27,7 @@ robots:
 move_group:
   robots_list: ['r1']
 velocity:
-  value: '2'
+  value: '3'
 config_folder:
   name: 'r1'
 moveit:

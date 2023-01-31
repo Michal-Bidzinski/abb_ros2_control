@@ -341,7 +341,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "runtime_config_package",
-            default_value="abb_irb_120_dual_config",
+            default_value="abb_irb_120_config",
             description='Package with the configuration and description files',
         )
     )
@@ -349,7 +349,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "param_file",
-            default_value="irb_120_dual_sim.yaml",
+            default_value="irb_120_real.yaml",
             description='File with the all parameters',
         )
     )

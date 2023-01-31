@@ -18,7 +18,7 @@ robots:
       rws_ip: '192.168.88.200'
       rws_port: '80'
       egm_port: '6512'
-      x_trans: '0.5' 
+      x_trans: '0.0' 
       y_trans: '0'
       z_trans: '0'
       x_rot: '0'
@@ -27,7 +27,7 @@ robots:
 move_group:
   robots_list: ['r1']
 velocity:
-  value: '2'
+  value: '200'
 config_folder:
   name: 'r1'
 moveit:
