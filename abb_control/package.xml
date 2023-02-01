@@ -12,6 +12,29 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
+  <depend>abb_data</depend>
+  <depend>abb_irb_120_config</depend>
+  <depend>abb_irb_120_dual_config</depend>
+  <depend>abb_irb_120_resource</depend>
+  <depend>abb_irb_4600_config</depend>
+  <depend>abb_irb_4600_dual_config</depend>
+  <depend>abb_irb_4600_resource</depend>
+  <depend>abb_move_group_interface</depend>
+
+  <depend>abb_egm_rws_managers</depend>
+  <depend>abb_libegm</depend>
+  <depend>abb_librws</depend>
+  <depend>abb_resource</depend>
+  <depend>abb_bringup</depend>
+  <depend>abb_hardware_interface</depend>
+  <depend>abb_ros2</depend>
+  <depend>abb_rws_client</depend>
+  <depend>abb_ros2_msgs</depend>
+  <depend>abb_irb4600_support</depend>
+  <depend>abb_irb1200_support</depend>
+  <depend>abb_irb1200_5_90_moveit_config</depend>
+
+
   <export>
     <build_type>ament_cmake</build_type>
   </export>

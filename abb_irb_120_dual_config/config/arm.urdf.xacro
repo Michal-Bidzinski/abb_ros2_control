@@ -59,9 +59,9 @@
     <material name="white">
     <color rgba="1 1 1 1"/>
     </material>
-    <link name="base_link"/>
-    <xacro:irb_120_arm prefix="${prefix_1}" parent_link='base_link' xyz='${x_trans_1} ${y_trans_1} ${z_trans_1}' rpy='${x_rot_1} ${y_rot_2} ${z_rot_1}' velocity="${velocity}"/>
-    <xacro:irb_120_arm prefix="${prefix_2}" parent_link='base_link' xyz='${x_trans_2} ${y_trans_2} ${z_trans_2}' rpy='${x_rot_2} ${y_rot_2} ${z_rot_2}' velocity="${velocity}"/>
+    <link name="r_base"/>
+    <xacro:irb_120_arm prefix="${prefix_1}" parent_link='r_base' xyz='${x_trans_1} ${y_trans_1} ${z_trans_1}' rpy='${x_rot_1} ${y_rot_2} ${z_rot_1}' velocity="${velocity}"/>
+    <xacro:irb_120_arm prefix="${prefix_2}" parent_link='r_base' xyz='${x_trans_2} ${y_trans_2} ${z_trans_2}' rpy='${x_rot_2} ${y_rot_2} ${z_rot_2}' velocity="${velocity}"/>
 
     <!-- ros2_control -->
     <xacro:include filename="$(find abb_irb_120_resource)/urdf/irb_120.ros2_control.xacro" />

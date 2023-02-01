@@ -19,11 +19,11 @@ robots:
       rws_port: '80'
       egm_port: '6511'
       x_trans: '0.0' 
-      y_trans: '0'
-      z_trans: '0'
+      y_trans: '0.9'
+      z_trans: '0.0'
       x_rot: '0'
       y_rot: '0'
-      z_rot: '0'
+      z_rot: '0.78539'
   r2:
     resource_package:
       package: 'abb_irb_120_resource'
@@ -35,11 +35,11 @@ robots:
       rws_port: '80'
       egm_port: '6512'
       x_trans: '0.0' 
-      y_trans: '0.5'
+      y_trans: '0.9'
       z_trans: '0'
       x_rot: '0'
       y_rot: '0'
-      z_rot: '0'
+      z_rot: '-0.78539'
 move_group:
   robots_list: ['r1', 'r2', 'dual']
 velocity:
