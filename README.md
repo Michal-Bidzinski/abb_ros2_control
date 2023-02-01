@@ -1,4 +1,4 @@
-## ABB_ros2_control
+## ABB ROS2 Control
 
 ROS2 repository to control ABB robots with MoveIt!2.
 
@@ -13,7 +13,7 @@ ROS2 repository to control ABB robots with MoveIt!2.
    ```sh
    cd src
    git clone https://github.com/Michal-Bidzinski/abb_ros2.git -b humble
-   git clone https://github.com/FlexBE/flexbe_app.git
+   git clone https://github.com/Michal-Bidzinski/abb_ros2_control.git
    ```
 2. Build:
    ```sh
