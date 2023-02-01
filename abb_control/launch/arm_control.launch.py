@@ -324,8 +324,9 @@ def launch_setup(context, *args, **kwargs):
         parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"prefixes_list": params['move_group']['robots_list']}],
     )
 
-    nodes_to_start = [rviz_node,
-                      static_tf,
+    nodes_to_start = [
+                      #rviz_node,
+                      #static_tf,
                       robot_state_publisher,
                       run_move_group_node, 
                       ros2_control_node,
@@ -349,7 +350,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "param_file",
-            default_value="irb_120_dual_sim.yaml",
+            default_value="irb_120_dual_real.yaml",
             description='File with the all parameters',
         )
     )

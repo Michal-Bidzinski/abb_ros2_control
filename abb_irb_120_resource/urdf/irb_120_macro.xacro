@@ -38,7 +38,7 @@
     <xacro:property name="l7_dl" value="-400" />
     <xacro:property name="l7_ul" value="400" />
 
-    <xacro:property name="e_trans" value="0.0 0.0 0.012" />
+    <xacro:property name="e_trans" value="0.0 0.0 0.028" />
     <xacro:property name="e_rot" value="0.0 0.0 0.0" />
     <xacro:property name="e_dl" value="" />
     <xacro:property name="e_ul" value="0" />
