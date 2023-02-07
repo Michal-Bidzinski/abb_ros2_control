@@ -66,7 +66,9 @@ MoveJActionServer::MoveJActionServer(const rclcpp::NodeOptions &options)
 : Node("MoveJActionServer", options)
 {}  
 
-MoveJActionServer::MoveJActionServer(std::shared_ptr<moveit::planning_interface::MoveGroupInterface> move_group_interface_obj, std::string move_group_name, const rclcpp::NodeOptions &options)
+MoveJActionServer::MoveJActionServer(std::shared_ptr<moveit::planning_interface::MoveGroupInterface>
+                                     move_group_interface_obj, std::string move_group_name, 
+                                     const rclcpp::NodeOptions &options)
 : Node("MoveJActionServer", move_group_name, options)
 {
   robot_arm = move_group_interface_obj;
@@ -116,11 +118,12 @@ void MoveJActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
     const auto goal = goal_handle->get_goal();
     auto result = std::make_shared<MoveJ::Result>();
     
-    
     robot_arm->setPlannerId("PTP");
     
     // get current state
-    const moveit::core::JointModelGroup* joint_model_group = robot_arm->getCurrentState()->getJointModelGroup(group_name);
+    const moveit::core::JointModelGroup* joint_model_group = 
+        robot_arm->getCurrentState()->getJointModelGroup(group_name);
+
     moveit::core::RobotStatePtr current_state = robot_arm->getCurrentState(10);
 
     // copy positions
@@ -151,7 +154,10 @@ void MoveJActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
 
         // plan and execute path
         moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-        bool success = (robot_arm->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+        
+        bool success = 
+            (robot_arm->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+        
         robot_arm->execute(my_plan);
 
         bool executed = false;

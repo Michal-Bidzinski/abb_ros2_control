@@ -78,7 +78,7 @@ int main(int argc, char** argv)
   r1_pose.oz = 0.0;
   r1_pose.ow = 0.0;
 
-  r1_pose.x = 0.362;
+  r1_pose.x = 0.462;
   r1_pose.y = 0.2;
   r1_pose.z = 0.345;
   r1_pose.ox = 0.707;

@@ -263,7 +263,7 @@ def launch_setup(context, *args, **kwargs):
         executable="static_transform_publisher",
         name="static_transform_publisher",
         output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "base_link"],
+        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "r_base"],
     )
 
     # Publish TF
@@ -325,8 +325,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     nodes_to_start = [
-                      #rviz_node,
-                      #static_tf,
+                      rviz_node,
+                      static_tf,
                       robot_state_publisher,
                       run_move_group_node, 
                       ros2_control_node,
