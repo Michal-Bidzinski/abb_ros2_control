@@ -250,10 +250,17 @@ void MoveLActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
         }
 
         robot_arm->setJointValueTarget(joint_group_positions);
+        std::cout << "AFTER SET TARGET" << std::endl;
 
         moveit::planning_interface::MoveGroupInterface::Plan my_plan;
         bool success = (robot_arm->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+        std::cout << "AFTER PLANNING" << std::endl;
+
         robot_arm->execute(my_plan);
+
+        std::cout << "AFETRT EXECUTE" << std::endl;
+
 
         result->result = "SUCCEED";
         goal_handle->succeed(result);

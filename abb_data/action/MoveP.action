@@ -1,5 +1,6 @@
 Position[] positions
 ---
 string result
+Joints[] joint_trajectory
 ---
 string feedback

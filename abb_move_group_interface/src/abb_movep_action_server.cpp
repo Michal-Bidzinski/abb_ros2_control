@@ -69,6 +69,7 @@
 #include "pinocchio/algorithm/jacobian.hpp"
 
 #include <iostream>
+#include "abb_data/msg/joints.hpp"
 
 
 // PINOCCHIO_MODEL_DIR is defined by the CMake but you can define your own directory here.
@@ -144,7 +145,7 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
 
     // create model from xml 
     pinocchio::Model model;
-    std::cout << "urdf_ arm" << urdf_arm << std::endl;
+    // std::cout << "urdf_ arm" << urdf_arm << std::endl;
     pinocchio::urdf::buildModelFromXML(urdf_arm,model);
     
     // create data required by the algorithms
@@ -157,7 +158,7 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
     {
         // set goal
         int ID_endeffector = model.getFrameId(goal->positions[0].frame);
-        std::cout << "ID:" << std::endl << ID_endeffector << std::endl;
+        // std::cout << "ID:" << std::endl << ID_endeffector << std::endl;
 
         Eigen::Quaterniond quat;
         quat.x() = goal->positions[0].ox;
@@ -170,7 +171,30 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
         const pinocchio::SE3 oMdes(R, Eigen::Vector3d(goal->positions[0].x, goal->positions[0].y, goal->positions[0].z));
 
         // parameters for IK
+
+        const moveit::core::JointModelGroup* robot_joint_model_group = robot_arm->getCurrentState()->getJointModelGroup(group_name);
+        moveit::core::RobotStatePtr current_robot_state = robot_arm->getCurrentState(10);
+        std::vector<double> joint_group_positions;
+        current_robot_state->copyJointGroupPositions(robot_joint_model_group, joint_group_positions);
+        
+        // std::cout << "CURRENT POSE:" << joint_group_positions << std::endl;
+        // for (std::size_t i = 0; i < joint_group_positions.size(); ++i)
+        // {
+        //     std::cout << "CURRENT POSE:" << joint_group_positions[i] << std::endl;
+        // }
+
+
         Eigen::VectorXd q = pinocchio::neutral(model);
+        // std::cout << "VECTOR Q:" << q[0] << std::endl;
+        // std::cout << "VECTOR Q:" << q[1] << std::endl;
+
+        for (std::size_t i = 0; i < joint_group_positions.size(); ++i)
+        {
+            q[i] = joint_group_positions[i];
+            // std::cout << "CURRENT POSE:" << joint_group_positions[i] << std::endl;
+        }
+
+
         const double eps  = 1e-1;
         const int IT_MAX  = 4000;
         const double DT   = 1e-1;
@@ -233,6 +257,8 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
         }
     }
 
+    using Joints = abb_data::msg::Joints;
+    std::vector<Joints> joint_trajectory;
 
     if (IK_success_all)
     {
@@ -258,7 +284,53 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
         bool success = (robot_arm->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
         robot_arm->execute(my_plan);
 
-        result->result = "SUCCEED";
+        // std::cout << "MY PLAN: " << my_plan.trajectory_.joint_trajectory.joint_names[0] << std::endl;
+
+        for (std::size_t i = 0; i < my_plan.trajectory_.joint_trajectory.points.size(); ++i)
+        {
+            Joints trajectory;
+            for (std::size_t j = 0; j < my_plan.trajectory_.joint_trajectory.points[i].positions.size(); ++j)
+            {
+                trajectory.joints.push_back(my_plan.trajectory_.joint_trajectory.points[i].positions[j]);
+                // std::cout << "Point " <<  i << " " << j << " :" << my_plan.trajectory_.joint_trajectory.points[i].positions[j] << std::endl;
+            }
+            joint_trajectory.push_back(trajectory);
+        }
+        bool executed = false;
+        int count = 0;
+
+        // check accuracy of execution
+        while (!executed  && rclcpp::ok() && count <=20)
+        {
+            std::vector<double> joint_current_positions;
+            current_state = robot_arm->getCurrentState(10);
+            current_state->copyJointGroupPositions(joint_model_group, joint_current_positions);
+
+            executed = true;
+            
+            for (std::size_t i = 0; i < joint_current_positions.size(); ++i)
+            {
+                if (abs(joint_current_positions[i] - joint_group_positions[i]) > 0.0137)
+                {
+                    executed = false;
+                } 
+            }
+            if (!executed)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                count++;
+            }
+        }
+        if (executed)
+        {
+            result->result = "SUCCEED";
+            result->joint_trajectory = joint_trajectory;
+        }
+        else
+        {
+            result->result = "FAIL";
+        }
+
         goal_handle->succeed(result);
     }
     else

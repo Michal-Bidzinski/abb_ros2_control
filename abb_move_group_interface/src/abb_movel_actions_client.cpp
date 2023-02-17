@@ -56,7 +56,7 @@ int main(int argc, char** argv)
   using MoveL = abb_data::action::MoveL;
   using Position = abb_data::msg::Position;
 
-  auto action_client = rclcpp_action::create_client<MoveL>(node, "/r1_abb_arm/MoveL");
+  auto action_client = rclcpp_action::create_client<MoveL>(node, "/dual_ur_manipulator/MoveL");
 
 
   if (!action_client->wait_for_action_server(std::chrono::seconds(20))) {
@@ -71,21 +71,21 @@ int main(int argc, char** argv)
   Position r2_pose;
 
   r1_pose.x = 0.28;
-  r1_pose.y = 0.2-0.3;
+  r1_pose.y = 0.2;
   r1_pose.z = 0.6;
-  r1_pose.ox = 1.0;
-  r1_pose.oy = 0.0;
-  r1_pose.oz = 0.0;
-  r1_pose.ow = 0.0;
-
-  r1_pose.x = 0.462;
-  r1_pose.y = -0.2;
-  r1_pose.z = 0.345;
   r1_pose.ox = 0.707;
   r1_pose.oy = 0.0;
   r1_pose.oz = 0.707;
   r1_pose.ow = 0.0;
-  r1_pose.frame = "r1_endeffector";
+
+  r1_pose.x = 0.453;
+  r1_pose.y = 0.15;
+  r1_pose.z = 0.253;
+  r1_pose.ox = 0.5;
+  r1_pose.oy = 0.5;
+  r1_pose.oz = 0.5;
+  r1_pose.ow = 0.5;
+  r1_pose.frame = "r1_tool0";
 
   // r1_pose.x = 0.362;
   // r1_pose.y = 0.2;

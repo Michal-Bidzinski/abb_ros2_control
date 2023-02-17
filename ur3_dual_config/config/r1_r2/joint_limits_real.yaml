@@ -1,0 +1,121 @@
+joint_limits: 
+  r1_shoulder_pan_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.87
+    max_velocity: 2.0
+    min_position: -2.87
+  r1_shoulder_lift_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 1.91
+    max_velocity: 2.0
+    min_position: -1.91
+  r1_elbow_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 1.22
+    max_velocity: 2.0
+    min_position: -1.91
+  r1_wrist_1_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.79
+    max_velocity: 2.0
+    min_position: -2.79
+  r1_wrist_2_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.09
+    max_velocity: 2.0
+    min_position: -2.09
+  r1_wrist_3_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 6.98
+    max_velocity: 2.0
+    min_position: -6.98
+  r2_shoulder_pan_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.87
+    max_velocity: 2.0
+    min_position: -2.87
+  r2_shoulder_lift_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 1.91
+    max_velocity: 2.0
+    min_position: -1.91
+  r2_elbow_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 1.22
+    max_velocity: 2.0
+    min_position: -1.91
+  r2_wrist_1_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.79
+    max_velocity: 2.0
+    min_position: -2.79
+  r2_wrist_2_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 2.09
+    max_velocity: 2.0
+    min_position: -2.09
+  r2_wrist_3_joint: 
+    has_acceleration_limits: True
+    has_effort_limits: True
+    has_position_limits: True
+    has_velocity_limits: True
+    max_acceleration: 3.0
+    max_effort: 150.0
+    max_position: 6.98
+    max_velocity: 2.0
+    min_position: -6.98

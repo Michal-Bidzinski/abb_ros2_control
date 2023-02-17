@@ -56,7 +56,7 @@ int main(int argc, char** argv)
   using MoveP = abb_data::action::MoveP;
   using Position = abb_data::msg::Position;
 
-  auto action_client = rclcpp_action::create_client<MoveP>(node, "/r1_abb_arm/MoveP");
+  auto action_client = rclcpp_action::create_client<MoveP>(node, "/dual_ur_manipulator/MoveP");
 
 
   if (!action_client->wait_for_action_server(std::chrono::seconds(20))) {
@@ -70,22 +70,22 @@ int main(int argc, char** argv)
   Position r1_pose;
   Position r2_pose;
 
-  r1_pose.x = 0.28;
-  r1_pose.y = 0.2-0.3;
-  r1_pose.z = 0.6;
-  r1_pose.ox = 1.0;
-  r1_pose.oy = 0.0;
-  r1_pose.oz = 0.0;
-  r1_pose.ow = 0.0;
+  // r1_pose.x = 0.28;
+  // r1_pose.y = 0.2-0.3;
+  // r1_pose.z = 0.6;
+  // r1_pose.ox = 1.0;
+  // r1_pose.oy = 0.0;
+  // r1_pose.oz = 0.0;
+  // r1_pose.ow = 0.0;
 
-  r1_pose.x = 0.462;
-  r1_pose.y = 0.2;
-  r1_pose.z = 0.345;
-  r1_pose.ox = 0.707;
-  r1_pose.oy = 0.0;
-  r1_pose.oz = 0.707;
-  r1_pose.ow = 0.0;
-  r1_pose.frame = "r1_endeffector";
+  r1_pose.x = 0.353;
+  r1_pose.y = 0.086;
+  r1_pose.z = 0.367;
+  r1_pose.ox = 0.5;
+  r1_pose.oy = 0.5;
+  r1_pose.oz = 0.5;
+  r1_pose.ow = 0.5;
+  r1_pose.frame = "r1_tool0";
 
   // r1_pose.x = 0.362;
   // r1_pose.y = 0.2;
@@ -150,6 +150,9 @@ int main(int argc, char** argv)
   }
 
   RCLCPP_INFO(node->get_logger(), "result received %s", wrapped_result.result->result.c_str());
+
+  
+  RCLCPP_INFO(node->get_logger(), "result received %i", wrapped_result.result->joint_trajectory.size());
 
   rclcpp::shutdown();
   return 0;

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="abb">
+
+    <xacro:arg name="prefix" default=""/>
+    <xacro:property name="prefix" value="$(arg prefix)"/>
+    <xacro:arg name="use_fake_hardware" default="true"/>
+    <xacro:property name="use_fake_hardware" value="$(arg use_fake_hardware)"/>
+    <xacro:arg name="rws_ip" default="None"/>
+    <xacro:property name="rws_ip" value="$(arg rws_ip)"/>
+    <xacro:arg name="rws_port" default="80"/>
+    <xacro:property name="rws_port" value="$(arg rws_port)"/>
+    <xacro:arg name="egm_port" default="6511"/>
+    <xacro:property name="egm_port" value="$(arg egm_port)"/>
+
+    <xacro:arg name="x_trans" default="0"/>
+    <xacro:property name="x_trans" value="$(arg x_trans)"/>
+    <xacro:arg name="y_trans" default="0"/>
+    <xacro:property name="y_trans" value="$(arg y_trans)"/>
+    <xacro:arg name="z_trans" default="0"/>
+    <xacro:property name="z_trans" value="$(arg z_trans)"/>
+    <xacro:arg name="x_rot" default="0"/>
+    <xacro:property name="x_rot" value="$(arg x_rot)"/>
+    <xacro:arg name="y_rot" default="0"/>
+    <xacro:property name="y_rot" value="$(arg y_rot)"/>
+    <xacro:arg name="z_rot" default="0"/>
+    <xacro:property name="z_rot" value="$(arg z_rot)"/>
+    
+    <xacro:arg name="velocity" default="2"/>
+    <xacro:property name="velocity" value="$(arg velocity)"/>
+
+    <!-- Robot description -->
+    <xacro:include filename="$(find abb_irb_120_resource)/urdf/irb_120_macro.xacro" />
+    
+    <material name="white">
+    <color rgba="1 1 1 1"/>
+    </material>
+    <link name="r_base"/>
+    <xacro:irb_120_arm prefix="${prefix}" parent_link='r_base' xyz='${x_trans} ${y_trans} ${z_trans}' rpy='${x_rot} ${y_rot} ${z_rot}' velocity='${velocity}'/>
+
+    <!-- ros2_control -->
+    <xacro:include filename="$(find abb_irb_120_resource)/urdf/irb_120.ros2_control.xacro" />
+    <xacro:irb_120_control
+        name="${prefix}_ABBMultiInterfaceHardware"
+        prefix="${prefix}"
+        use_fake_hardware="${use_fake_hardware}"
+        rws_ip="${rws_ip}"
+        rws_port="${rws_port}"
+        egm_port="${egm_port}"/>
+    
+</robot>

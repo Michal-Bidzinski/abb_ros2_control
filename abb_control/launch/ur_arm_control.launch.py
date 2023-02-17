@@ -15,6 +15,13 @@ from launch.actions import DeclareLaunchArgument
 from launch.actions import OpaqueFunction
 from launch.conditions import IfCondition
 
+def save_urdf_file(package_name, file_path, robot_description):
+    package_path = get_package_share_directory(package_name)
+    urdf_filename = os.path.join(package_path, file_path)
+    urdf_file = open(urdf_filename, "a")
+    urdf_file.write(robot_description)
+    urdf_file.close()
+    return  urdf_filename
 
 def load_yaml(package_name, file_path):
     package_path = get_package_share_directory(package_name)
@@ -58,39 +65,10 @@ def launch_setup(context, *args, **kwargs):
             "use_fake_hardware" + num + ":=",
             arm_params[key]['robot_description']['use_fake_hardware'],
             " ",
-            "fake_sensor_commands" + num + ":=",
-            arm_params[key]['robot_description']['fake_sensor_commands'],
+            "name" + num + ":=",
+            arm_params[key]['robot_description']['name'],
             " ",
-            "rws_ip" + num + ":=",
-            arm_params[key]['robot_description']['rws_ip'],
-            " ",
-            "rws_port" + num + ":=",
-            arm_params[key]['robot_description']['rws_port'],
-            " ",
-            "egm_port" + num + ":=",
-            arm_params[key]['robot_description']['egm_port'],
-            " ",   
-            "x_trans" + num + ":=",
-            arm_params[key]['robot_description']['x_trans'],
-            " ",   
-            "y_trans" + num + ":=",
-            arm_params[key]['robot_description']['y_trans'],
-            " ",
-            "z_trans" + num + ":=",
-            arm_params[key]['robot_description']['z_trans'],
-            " ",
-            "x_rot" + num + ":=",
-            arm_params[key]['robot_description']['x_rot'],
-            " ",
-            "y_rot" + num + ":=",
-            arm_params[key]['robot_description']['y_rot'],
-            " ",
-            "z_rot" + num + ":=",
-            arm_params[key]['robot_description']['z_rot'],
-            " ",
-            "velocity" + num + ":=",
-            params['velocity']['value'],
-            " ",]
+            ]
         )
 
     robot_description_content = Command(
@@ -108,6 +86,8 @@ def launch_setup(context, *args, **kwargs):
 
     robot_description = {"robot_description": robot_description_content}
 
+    # urdf_file_path = save_urdf_file("abb_control", "launch/ur3_model.urdf", robot_description_content.perform(context))
+
 
     # ROBOT DESCRIPTION SEMANTIC
     robot_description_semantic_args = ''
@@ -121,7 +101,10 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "prefix" + num + ":=",
             key,
-            " "]
+            " "
+            "name" + num + ":=",
+            arm_params[key]['robot_description']['name'],
+            " ",]
         )
 
     robot_description_semantic_config = Command(
@@ -327,7 +310,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "runtime_config_package",
-            default_value="abb_irb_120_dual_config",
+            default_value="ur_dual_config",
             description='Package with the configuration and description files',
         )
     )

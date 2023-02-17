@@ -88,7 +88,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < prefixes.size(); ++i)
     {
         std::cout << prefixes[i] << std::endl;
-        group_names_list.push_back(prefixes[i] + "_abb_arm");
+        group_names_list.push_back(prefixes[i] + "_manipulator");
     }
     
     // List of servers to get them in main scope

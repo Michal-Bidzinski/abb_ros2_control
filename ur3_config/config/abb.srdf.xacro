@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="abb">
+
+  <xacro:arg name="prefix" default="r1"/>
+  <xacro:property name="prefix" value="$(arg prefix)"/>
+
+  <xacro:include filename="$(find abb_irb_120_resource)/srdf/irb_120_macro.srdf.xacro"/>
+  <xacro:abb_irb_120_srdf prefix='${prefix}'/>
+
+</robot>

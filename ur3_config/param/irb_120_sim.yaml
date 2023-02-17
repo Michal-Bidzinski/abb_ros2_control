@@ -13,7 +13,7 @@ robots:
       package: 'abb_irb_120_resource'
     robot_description:
       description_file: 'arm.urdf.xacro'
-      use_fake_hardware: 'False'
+      use_fake_hardware: 'True'
       fake_sensor_commands: 'False'
       rws_ip: '192.168.88.200'
       rws_port: '80'
@@ -27,12 +27,12 @@ robots:
 move_group:
   robots_list: ['r1']
 velocity:
-  value: '200'
+  value: '3'
 config_folder:
   name: 'r1'
 moveit:
   kinematics: 'kinematics.yaml'
   controllers: 'controllers.yaml'
-  joint_limits: 'joint_limits_real.yaml'
+  joint_limits: 'joint_limits_sim.yaml'
 controller_manager:
   ros_controllers: 'ros_controllers.yaml'

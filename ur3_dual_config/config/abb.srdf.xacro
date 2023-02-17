@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="abb">
+
+
+  <xacro:arg name="name_1" default="ur"/>
+  <xacro:arg name="name_2" default="ur"/>
+  <xacro:property name="name_1" value="$(arg name_1)"/>
+  <xacro:property name="name_2" value="$(arg name_2)"/>
+
+
+  <xacro:arg name="prefix_1" default="r1_"/>
+  <xacro:property name="prefix_1" value="$(arg prefix_1)"/>
+
+  <xacro:arg name="prefix_2" default="r2_"/>
+  <xacro:property name="prefix_2" value="$(arg prefix_2)"/>
+
+  <xacro:include filename="$(find ur3_dual_config)/config/ur_macro.srdf.xacro"/>
+  <xacro:ur_srdf name="$(arg name_1)" prefix="$(arg prefix_1)"/>
+
+  <xacro:ur_srdf name="$(arg name_2)" prefix="$(arg prefix_2)"/>
+
+  <group name="dual_ur_manipulator">
+    <group name="${prefix_1}ur_manipulator" />
+    <group name="${prefix_2}ur_manipulator" />
+  </group>
+
+</robot>

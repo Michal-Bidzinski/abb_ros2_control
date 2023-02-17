@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>abb_data</name>
+  <name>ur_dual_config</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="michal.bidzinski@onet.pl">root</maintainer>
@@ -12,13 +12,14 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <exec_depend>abb_irb_120_resource</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
 
-  <depend>action_msgs</depend>
-  <depend>moveit_msgs</depend>
-  <depend>trajectory_msgs</depend>
-
-  <member_of_group>rosidl_interface_packages</member_of_group>
+  <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
+  <!-- <exec_depend>warehouse_ros_mongo</exec_depend> -->
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>xacro</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

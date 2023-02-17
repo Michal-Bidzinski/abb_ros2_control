@@ -56,7 +56,7 @@ int main(int argc, char** argv)
   using MoveJ = abb_data::action::MoveJ;
   using Joints = abb_data::msg::Joints;
 
-  auto action_client = rclcpp_action::create_client<MoveJ>(node, "/r1_abb_arm/MoveJ");
+  auto action_client = rclcpp_action::create_client<MoveJ>(node, "/dual_ur_manipulator/MoveJ");
 
 
   if (!action_client->wait_for_action_server(std::chrono::seconds(20))) {
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
   r2_joints.joints.push_back(0.0);
   r2_joints.joints.push_back(0.0);
 
-  goal_msg.joints_state = {r1_joints};
+  goal_msg.joints_state = {r1_joints, r2_joints};
 
   RCLCPP_INFO(node->get_logger(), "Sending goal");
   // Ask server to achieve some goal and wait until it's accepted

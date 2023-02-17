@@ -1,0 +1,43 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    r1_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    r2_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+r1_arm_controller:
+  ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    joints:
+      - r1_shoulder_pan_joint
+      - r1_shoulder_lift_joint
+      - r1_elbow_joint
+      - r1_wrist_1_joint
+      - r1_wrist_2_joint
+      - r1_wrist_3_joint
+
+r2_arm_controller:
+  ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    joints:
+      - r2_shoulder_pan_joint
+      - r2_shoulder_lift_joint
+      - r2_elbow_joint
+      - r2_wrist_1_joint
+      - r2_wrist_2_joint
+      - r2_wrist_3_joint
