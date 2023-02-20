@@ -160,6 +160,19 @@ void MoveJActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
         
         robot_arm->execute(my_plan);
 
+
+        for (std::size_t i = 0; i < my_plan.trajectory_.joint_trajectory.points.size(); ++i)
+        {
+            // Joints trajectory;
+            for (std::size_t j = 0; j < my_plan.trajectory_.joint_trajectory.points[i].positions.size(); ++j)
+            {
+                // trajectory.joints.push_back(my_plan.trajectory_.joint_trajectory.points[i].positions[j]);
+                std::cout << "Point " <<  i << " " << j << " :" << my_plan.trajectory_.joint_trajectory.points[i].positions[j] * 180.0/3.14 << std::endl;
+            }
+            // joint_trajectory.push_back(trajectory);
+        }
+
+
         bool executed = false;
         int count = 0;
 

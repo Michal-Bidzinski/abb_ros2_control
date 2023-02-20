@@ -154,6 +154,16 @@ int main(int argc, char** argv)
   
   RCLCPP_INFO(node->get_logger(), "result received %i", wrapped_result.result->joint_trajectory.size());
 
+
+  for (std::size_t i = 0; i <  wrapped_result.result->joint_trajectory.size(); ++i)
+  {
+      for (std::size_t j = 0; j <  wrapped_result.result->joint_trajectory[i].joints.size(); ++j)
+      {
+          std::cout << "Point " <<  i << " " << j << " :" << wrapped_result.result->joint_trajectory[i].joints[j] * 180.0/3.14 << std::endl;
+      }
+  }
+
+
   rclcpp::shutdown();
   return 0;
 }

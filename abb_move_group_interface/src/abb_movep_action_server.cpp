@@ -292,7 +292,7 @@ void MovePActionServer::execute(const std::shared_ptr<GoalHandle> goal_handle)
             for (std::size_t j = 0; j < my_plan.trajectory_.joint_trajectory.points[i].positions.size(); ++j)
             {
                 trajectory.joints.push_back(my_plan.trajectory_.joint_trajectory.points[i].positions[j]);
-                // std::cout << "Point " <<  i << " " << j << " :" << my_plan.trajectory_.joint_trajectory.points[i].positions[j] << std::endl;
+                std::cout << "Point " <<  i << " " << j << " :" << my_plan.trajectory_.joint_trajectory.points[i].positions[j] * 180.0/3.14 << std::endl;
             }
             joint_trajectory.push_back(trajectory);
         }
