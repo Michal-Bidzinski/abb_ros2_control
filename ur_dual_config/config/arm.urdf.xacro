@@ -190,7 +190,7 @@
      reverse_ip="$(arg reverse_ip_2)"
      script_command_port="$(arg script_command_port_2)"
      >
-     <origin xyz="$(arg x_pose_2) 1.0 $(arg z_pose_2)" rpy="0 0 0" />          <!-- position robot in the world -->
+     <origin xyz="$(arg x_pose_2) $(arg y_pose_2) $(arg z_pose_2)" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
     
 </robot>
